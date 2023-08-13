@@ -41,4 +41,10 @@ public class StudentController {
         boolean deleted = studentService.delete(id);
         return deleted;
     }
+
+    @GetMapping(path="/get-by-id", params = "id")
+    public StudentDTO getStudent(@RequestParam(value="id") int id) {
+        StudentDTO student = studentService.getStudent(id);
+        return student;
+    }
 }

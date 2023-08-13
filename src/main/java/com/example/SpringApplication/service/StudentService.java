@@ -14,4 +14,6 @@ public interface StudentService {
     String update(int id, StudentUpdateDTO studentUpdateDTO);
 
     boolean delete(int id);
+
+    StudentDTO getStudent(int id);
 }
