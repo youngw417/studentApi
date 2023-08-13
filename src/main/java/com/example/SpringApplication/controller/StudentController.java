@@ -1,9 +1,13 @@
 package com.example.SpringApplication.controller;
 
+import com.example.SpringApplication.dto.StudentDTO;
 import com.example.SpringApplication.dto.StudentSaveDTO;
+import com.example.SpringApplication.dto.StudentUpdateDTO;
 import com.example.SpringApplication.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -20,8 +24,21 @@ public class StudentController {
         return id;
     }
 
-    @GetMapping(path="/getrecords")
-    public String getFat() {
-        return "I am from Korea";
+    @GetMapping(path="/getallstudents")
+    public List<StudentDTO> getAll() {
+        List<StudentDTO> studentList = studentService.getall();
+        return studentList;
+    }
+
+    @PutMapping(path="/update/{id}")
+    public String update(@PathVariable int id, @RequestBody StudentUpdateDTO studentUpdateDTO) {
+        String response = studentService.update(id, studentUpdateDTO);
+        return response;
+    }
+
+    @DeleteMapping(path="/delete/{id}")
+    public boolean delete(@PathVariable(value = "id") int id) {
+        boolean deleted = studentService.delete(id);
+        return deleted;
     }
 }
